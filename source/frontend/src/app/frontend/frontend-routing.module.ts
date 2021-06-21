@@ -1,12 +1,14 @@
+import { FrontendProducsListComponent } from './product/components/frontend-producs-list/frontend-producs-list.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
 
-
+const routes: Routes = [
+  {path: 'shop', component: FrontendProducsListComponent}
+];
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [RouterModule.forChild(routes)],
 })
 export class FrontendRoutingModule { }
