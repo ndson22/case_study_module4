@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::prefix('admin')->group(function () {
+    Route::prefix('products')->group(function () {
+        Route::get('/', [ProductController::class,'index'])->name('product.index');
+        Route::post('/create', [ProductController::class,'store'])->name('product.create');
+        Route::put('/{id}/edit', [ProductController::class,'update'])->name('product.update');
+        Route::delete('/{id}/delete', [ProductController::class,'destroy'])->name('product.destroy');
+
+    });
+});
+
