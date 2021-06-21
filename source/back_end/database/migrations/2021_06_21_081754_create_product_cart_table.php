@@ -14,15 +14,15 @@ class CreateProductCartTable extends Migration
     public function up()
     {
         Schema::create('product_cart', function (Blueprint $table) {
-            $table->integer('id')->autoIncrement();
             $table->integer('product_id');
             $table->foreign('product_id')->references('id')->on('products');
             $table->integer('cart_id');
             $table->foreign('cart_id')->references('id')->on('carts');
-            $table->float('quantity'); 
-            $table->float('size_id'); 
-            $table->float('price'); 
+            $table->float('quantity');
+            $table->float('size_id');
+            $table->float('price');
             $table->timestamps();
+            $table->primary(['product_id', 'cart_id']);
         });
     }
 

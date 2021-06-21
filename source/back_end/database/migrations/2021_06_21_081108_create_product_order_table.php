@@ -14,16 +14,16 @@ class CreateProductOrderTable extends Migration
     public function up()
     {
         Schema::create('product_order', function (Blueprint $table) {
-            $table->integer('id')->autoIncrement();
             $table->integer('product_id');
             $table->foreign('product_id')->references('id')->on('products');
             $table->integer('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->float('quantity'); 
-            $table->float('size_id'); 
-            $table->string('price'); 
+            $table->float('quantity');
+            $table->float('size_id');
+            $table->string('price');
 
             $table->timestamps();
+            $table->primary(['product_id', 'order_id']);
         });
     }
 
