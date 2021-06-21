@@ -4,86 +4,88 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProductRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Exception;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function getProducts()
     {
-        $products = Product::all();
-        return response()->json($products, 200);
+        try {
+            $products = Product::all();
+            return response()->json($products, 200);
+        } catch(Exception $e) {
+            return response()->json(['message' => 'error']);
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(StoreProductRequest $request)
     {
+        try {
+            DB::beginTransaction();
 
+            $product = new Product();
+            $newImageName = time() . '-' . str_replace(' ', '', $request->name) . "." . $request->image->getClientOriginalExtension();
+            $request->image->storeAs('public/images/products', $newImageName);
+            $product->fill($request->all());
+            $product->image = "images/products/" . $newImageName;
+            $product->save();
+            $product->sizes()->attach($request->size_id, ['amount' => $request->amount]);
+
+            DB::commit();
+            $products = Product::all();
+            return response()->json($products);
+        } catch(Exception $e) {
+            DB::rollback();
+            return response()->json(['message' => 'error']);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function edit(StoreProductRequest $request, $productId)
     {
-        $product = new Product();
-        $product->fill($request->all());
-        $product->save();
-        return response()->json('add successfully !', 200);
+        try {
+            DB::beginTransaction();
+
+            $product = Product::find($productId);
+            $product->fill($request->all());
+            if ($request->hasFile('image')) {
+                $request->validate([
+                    'image' => 'required|image|file_extension:jpeg,png|mimes:jpeg,png|mimetypes:image/jpeg,image/png|max:2048'
+                ]);
+                Storage::delete('public/' . $product->image);
+                $newImageName = time() . '-' . str_replace(' ', '', $request->name) . "." . $request->image->getClientOriginalExtension();
+                $request->image->storeAs('public/images/products', $newImageName);
+                $product->image = "images/products/" . $newImageName;
+            }
+            $product->save();
+            $product->sizes()->sync($request->size_id, ['amount' => $request->amount]);
+
+            DB::commit();
+            $products = Product::all();
+            return response()->json($products);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json(['message' => 'error']);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
+    public function destroy($productId)
     {
-        //
-    }
+        try {
+            DB::beginTransaction();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
+            $product = Product::find($productId);
+            $product->sizes()->detach();
+            $product->delete();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
+            DB::commit();
+            $products = Product::all();
+            return response()->json($products);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'error']);
+        }
     }
 }
