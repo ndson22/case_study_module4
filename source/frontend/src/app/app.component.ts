@@ -11,28 +11,28 @@ export class AppComponent {
 
   frontendStyles = [
     'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap',
-    'assets/backend/css/bootstrap.min.css',
-    'assets/backend/css/bootstrap.min.css',
-    'assets/backend/css/font-awesome.min.css',
-    'assets/backend/css/elegant-icons.css',
-    'assets/backend/css/magnific-popup.css',
-    'assets/backend/css/nice-select.css',
-    'assets/backend/css/owl.carousel.min.css',
-    'assets/backend/css/slicknav.min.css',
-    'assets/backend/css/style.css',
+    'assets/frontend/css/bootstrap.min.css',
+    'assets/frontend/css/bootstrap.min.css',
+    'assets/frontend/css/font-awesome.min.css',
+    'assets/frontend/css/elegant-icons.css',
+    'assets/frontend/css/magnific-popup.css',
+    'assets/frontend/css/nice-select.css',
+    'assets/frontend/css/owl.carousel.min.css',
+    'assets/frontend/css/slicknav.min.css',
+    'assets/frontend/css/style.css',
   ];
 
   frontendScripts = [
-    'assets/backend/js/jquery-3.3.1.min.js',
-    'assets/backend/js/bootstrap.min.js',
-    'assets/backend/js/jquery.nice-select.min.js',
-    'assets/backend/js/jquery.nicescroll.min.js',
-    'assets/backend/js/jquery.magnific-popup.min.js',
-    'assets/backend/js/jquery.countdown.min.js',
-    'assets/backend/js/jquery.slicknav.js',
-    'assets/backend/js/mixitup.min.js',
-    'assets/backend/js/owl.carousel.min.js',
-    'assets/backend/js/main.js',
+    'assets/frontend/js/jquery-3.3.1.min.js',
+    'assets/frontend/js/bootstrap.min.js',
+    'assets/frontend/js/jquery.nice-select.min.js',
+    'assets/frontend/js/jquery.nicescroll.min.js',
+    'assets/frontend/js/jquery.magnific-popup.min.js',
+    'assets/frontend/js/jquery.countdown.min.js',
+    'assets/frontend/js/jquery.slicknav.js',
+    'assets/frontend/js/mixitup.min.js',
+    'assets/frontend/js/owl.carousel.min.js',
+    'assets/frontend/js/main.js',
   ];
 
   backendStyles = [
