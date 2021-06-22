@@ -46,15 +46,15 @@ class ProductController extends Controller
     }
 
     public function update(StoreProductRequest $request, $productId)
+
     {
         try {
             DB::beginTransaction();
-
             $product = Product::find($productId);
             $product->fill($request->all());
             if ($request->hasFile('image')) {
                 $request->validate([
-                    'image' => 'required|image|file_extension:jpeg,png|mimes:jpeg,png|mimetypes:image/jpeg,image/png|max:2048'
+                    'image' => 'required|image|mimetypes:image/jpeg,image/png|max:2048'
                 ]);
                 Storage::delete('public/' . $product->image);
                 $newImageName = time() . '-' . str_replace(' ', '', $request->name) . "." . $request->image->getClientOriginalExtension();
@@ -62,14 +62,19 @@ class ProductController extends Controller
                 $product->image = "images/products/" . $newImageName;
             }
             $product->save();
-            $product->sizes()->sync($request->size_id, ['amount' => $request->amount]);
+            $product_amount = [];
+            foreach ($request->size_id as $key => $id) {
+                $product_amount[$id] = ['amount' => $request->amount[$key]];
+            };
+
+            $product->sizes()->sync($product_amount);
 
             DB::commit();
             $products = Product::all();
             return response()->json($products);
         } catch (Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'error']);
+            return response()->json(['message' => $e->getMessage()]);
         }
     }
 
