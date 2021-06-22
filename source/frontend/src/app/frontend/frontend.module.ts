@@ -4,13 +4,17 @@ import { FrontendRoutingModule } from './frontend-routing.module';
 import { FrontendProducsListComponent } from './product/components/frontend-producs-list/frontend-producs-list.component';
 import { FrontendHeaderComponent } from './layouts/frontend-header/frontend-header.component';
 import { FrontendFooterComponent } from './layouts/frontend-footer/frontend-footer.component';
+import { FrontendHomeComponent } from './home/components/frontend-home/frontend-home.component';
+
 
 @NgModule({
   declarations: [
-  
+
     FrontendProducsListComponent,
        FrontendHeaderComponent,
-       FrontendFooterComponent
+       FrontendFooterComponent,
+       FrontendHomeComponent,
+
   ],
   imports: [
     CommonModule,

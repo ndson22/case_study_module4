@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\frontend\ClientProductController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,4 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+Route::get('/products', [ClientProductController::class, 'getProducts'])->name('client.product.list');

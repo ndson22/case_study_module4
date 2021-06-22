@@ -7,11 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./frontend-producs-list.component.css']
 })
 export class FrontendProducsListComponent implements OnInit {
+  products !: any;
 
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
+    this.loadProducts();
   }
 
-  
+  loadProducts() {
+    this.products = this.productService.getProducts();
+  }
 }
