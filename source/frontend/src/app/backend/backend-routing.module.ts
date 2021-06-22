@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [{
-}];
+import { BackendProductsListComponent } from './product/backend-products-list/backend-products-list.component';
+
+const routes: Routes = [
+  {path: 'products', component: BackendProductsListComponent}
+];
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [RouterModule.forChild(routes)]
 })
 export class BackendRoutingModule { }

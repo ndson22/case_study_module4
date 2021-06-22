@@ -43,7 +43,7 @@ class ProductController extends Controller
         }
     }
 
-    public function edit(StoreProductRequest $request, $productId)
+    public function update(StoreProductRequest $request, $productId)
     {
         try {
             DB::beginTransaction();
