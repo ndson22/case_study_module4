@@ -18,4 +18,20 @@ export class FrontendProducsListComponent implements OnInit {
   loadProducts() {
     this.products = this.productService.getProducts();
   }
+
+  getFilterProducts($event: any) {
+
+    this.productService.filterProducts({
+      filter: $event.target.getAttribute('data-filter'),
+      value: $event.target.getAttribute('data-value')
+    }).subscribe({
+      next: (res) => {
+        
+        console.log(res);
+      },
+      error: (res) => {
+        console.log(res);
+      }
+    });
+  }
 }

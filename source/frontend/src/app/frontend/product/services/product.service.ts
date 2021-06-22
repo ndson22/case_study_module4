@@ -13,4 +13,8 @@ export class ProductService {
   getProducts(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/products`);
   }
+
+  filterProducts(data: object): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/products/filter`, data)
+  }
 }

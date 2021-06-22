@@ -29,3 +29,4 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/products', [ClientProductController::class, 'getProducts'])->name('client.product.list');
+Route::post('/products/filter', [ClientProductController::class, 'filterProducts'])->name('client.product.filter');
