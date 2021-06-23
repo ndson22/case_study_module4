@@ -27,23 +27,25 @@ class ProductController extends Controller
             DB::beginTransaction();
 
             $product = new Product();
-            $newImageName = time() . '-' . str_replace(' ', '', $request->name) . "." . $request->image->getClientOriginalExtension();
+            $newImageName = time() . '-' . str_replace(' ', '', $request->product_name) . "." . $request->image->getClientOriginalExtension();
             $request->image->storeAs('public/images/products', $newImageName);
             $product->fill($request->all());
             $product->image = "images/products/" . $newImageName;
             $product->save();
-            $product->sizes()->attach($request->size_id, ['amount' => $request->amount]);
+            foreach ($request->size_id as $key => $id) {
+                $product->sizes()->attach($id, ['amount' => $request->amount[$key]]);
+            };
 
             DB::commit();
             $products = Product::all();
             return response()->json($products);
         } catch(Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'error']);
+            return response()->json(['message' => $e->getMessage()]);
         }
     }
 
-    public function edit(StoreProductRequest $request, $productId)
+    public function update(StoreProductRequest $request, $productId)
     {
         try {
             DB::beginTransaction();
@@ -84,6 +86,18 @@ class ProductController extends Controller
             $products = Product::all();
             return response()->json($products);
         } catch (Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'error']);
+        }
+    }
+
+    public function getDetailProduct($productId){
+        try{
+            DB::beginTransaction();
+            $product = Product::find($productId);
+            DB::commit();
+            return response()->json($product, 200);
+        }catch(Exception $e){
             DB::rollBack();
             return response()->json(['message' => 'error']);
         }

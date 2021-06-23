@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Order;
+use App\Models\Size;
 
 class Product extends Model
 {
@@ -21,6 +22,6 @@ class Product extends Model
 
     public function sizes()
     {
-        return $this->belongsToMany(Size::class, 'id', 'id')->withPivot('');
+        return $this->belongsToMany(Size::class)->withPivot('amount');
     }
 }

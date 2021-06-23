@@ -146,9 +146,13 @@
                   </div>
               </div>
               <div class="row" >
-                  <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let product of products | async">
+
+                  <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let product of products">
+
                       <div class="product__item">
-                          <div class="product__item__pic set-bg" data-setbg="../../../../../assets/frontend/img/product/product-2.jpg">
+                          <div class="product__item__pic set-bg" data-setbg="">
+                            <img src="{{ product.image }}"/>
+
                           </div>
                           <div class="product__item__text">
                               <h6>{{ product.product_name }}</h6>
