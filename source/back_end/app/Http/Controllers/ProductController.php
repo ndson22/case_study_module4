@@ -95,4 +95,16 @@ class ProductController extends Controller
             return response()->json(['message' => 'error']);
         }
     }
+
+    public function getDetailProduct($productId){
+        try{
+            DB::beginTransaction();
+            $product = Product::find($productId);
+            DB::commit();
+            return response()->json($product, 200);
+        }catch(Exception $e){
+            DB::rollBack();
+            return response()->json(['message' => 'error']);
+        }
+    }
 }

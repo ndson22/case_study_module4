@@ -10,11 +10,18 @@ export class ProductService {
 
   constructor(private http:HttpClient) { }
 
-  getProducts(): Observable<any> {
+  getListProducts(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/products`);
+  }
+  getDetailProduct(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/products/detail/${id}`);
   }
 
   filterProducts(data: object): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/products/filter`, data)
+    return this.http.post(`${environment.apiUrl}/products/filter`, data);
+  }
+
+  sortByPrice(fromPrice: number, toPrice: number): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/products/sort`, {fromPrice: fromPrice, toPrice: toPrice});
   }
 }

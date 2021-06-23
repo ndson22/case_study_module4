@@ -5,6 +5,7 @@ import { FrontendProducsListComponent } from './product/components/frontend-prod
 import { FrontendHeaderComponent } from './layouts/frontend-header/frontend-header.component';
 import { FrontendFooterComponent } from './layouts/frontend-footer/frontend-footer.component';
 import { FrontendHomeComponent } from './home/components/frontend-home/frontend-home.component';
+import { FrontendProductDetailComponent } from './product/components/frontend-product-detail/frontend-product-detail.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { FrontendHomeComponent } from './home/components/frontend-home/frontend-
        FrontendHeaderComponent,
        FrontendFooterComponent,
        FrontendHomeComponent,
+       FrontendProductDetailComponent,
 
   ],
   imports: [
