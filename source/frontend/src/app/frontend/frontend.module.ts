@@ -6,7 +6,10 @@ import { FrontendHeaderComponent } from './layouts/frontend-header/frontend-head
 import { FrontendFooterComponent } from './layouts/frontend-footer/frontend-footer.component';
 import { FrontendHomeComponent } from './home/components/frontend-home/frontend-home.component';
 import { FrontendProductDetailComponent } from './product/components/frontend-product-detail/frontend-product-detail.component';
+import { FrontendCartComponent } from './cart/components/frontend-cart/frontend-cart.component';
 
+
+// import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -16,11 +19,14 @@ import { FrontendProductDetailComponent } from './product/components/frontend-pr
        FrontendFooterComponent,
        FrontendHomeComponent,
        FrontendProductDetailComponent,
+       FrontendCartComponent,
+
 
   ],
   imports: [
     CommonModule,
-    FrontendRoutingModule
+    FrontendRoutingModule,
+
   ]
 })
 export class FrontendModule { }

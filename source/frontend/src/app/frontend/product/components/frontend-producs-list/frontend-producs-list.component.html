@@ -6,7 +6,7 @@
               <div class="breadcrumb__text">
                   <h4>Shop</h4>
                   <div class="breadcrumb__links">
-                      <a href="./index.html">Home</a>
+                      <a routerLink="" routerLinkActive="active">Home</a>
                       <span>Shop</span>
                   </div>
               </div>
@@ -151,8 +151,8 @@
 
                       <div class="product__item">
                           <div class="product__item__pic set-bg" data-setbg="">
-                            <img src="{{ product.image }}"/>
 
+                            <a routerLink="/shop/detail/{{ product.id }}" routerLinkActive="active" title="{{ product.product_name }}"><img src="{{ product.image }}"/></a>
                           </div>
                           <div class="product__item__text">
                               <h6>{{ product.product_name }}</h6>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment.prod';
 import { Product } from '../../product';
 import { ProductService } from '../../services/product.service';
@@ -44,11 +45,12 @@ export class FrontendProductDetailComponent implements OnInit {
 
           product.image = `${environment.baseUrl}${product.image}`
           product.price = this.formatter.format(product.price);
-
-
         });
       }
     });
+  }
 
+  addToCart(){
+    // this.toastr.success('Hello world!', 'Toastr fun!');
   }
 }

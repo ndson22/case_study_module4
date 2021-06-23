@@ -66,7 +66,8 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li ><a href="./index.html">Home</a></li>
+                            <li ><a routerLink="" routerLinkActive="active">Home</a></li>
+
                             <li ><a routerLink="/shop" routerLinkActive="active">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <!-- <ul class="dropdown">
@@ -79,6 +80,7 @@
                             </li>
                             <!-- <li><a href="./blog.html">Blog</a></li> -->
                             <li><a href="./contact.html">Contacts</a></li>
+
                         </ul>
                     </nav>
                 </div>
@@ -86,8 +88,8 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="../../../../assets/frontend/img/icon/search.png" alt=""></a>
                         <a href="#"><img src="../../../../assets/frontend/img/icon/heart.png" alt=""></a>
-                        <a href="#"><img src="../../../../assets/frontend/img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
+                        <a routerLink="/shop/cart" routerLinkActive="active"><img src="../../../../assets/frontend/img/icon/cart.png" alt=""> <span>0</span></a>
+                        <div class="totalCart">(0)</div>
                     </div>
                 </div>
             </div>
